@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "matchify.install.before_install"
-# after_install = "matchify.install.after_install"
+#after_install = "matchify.hooks.after_install"
 
 # Uninstallation
 # ------------
@@ -144,6 +144,9 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
+# في ملف hooks.py
+
+
 
 # Scheduled Tasks
 # ---------------
@@ -241,4 +244,3 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

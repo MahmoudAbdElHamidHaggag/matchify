@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{date}-{####}",
+ "creation": "2025-05-04 01:23:12.024164",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_gtva",
+  "identify_customers",
+  "customer_group",
+  "customer",
+  "customer_by_sales_person",
+  "currency",
+  "column_break_akpv",
+  "date",
+  "audit_office",
+  "section_break_r9wx",
+  "customer_balance",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_gtva",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "identify_customers",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Identify Customers",
+   "options": "All Customer\nCustomer Group\nCustomer\nCustomer by Sales Person",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_balance",
+   "fieldtype": "Table",
+   "label": "Customer Balance",
+   "options": "Customer Balance Row",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Customer Authentications",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "audit_office",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Audit Office",
+   "options": "Audit Office for Certifications",
+   "reqd": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "currency",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.identify_customers == 'Customer Group'",
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "mandatory_depends_on": "eval:doc.identify_customers == 'Customer Group'",
+   "options": "Customer Group"
+  },
+  {
+   "depends_on": "eval:doc.identify_customers == 'Customer'",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "mandatory_depends_on": "eval:doc.identify_customers == 'Customer'",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_akpv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_r9wx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.identify_customers == 'Customer by Sales Person'",
+   "fieldname": "customer_by_sales_person",
+   "fieldtype": "Link",
+   "label": "Customer by Sales Person",
+   "mandatory_depends_on": "eval:doc.identify_customers == 'Customer by Sales Person'",
+   "options": "Sales Person"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-05-04 22:13:17.199178",
+ "modified_by": "Administrator",
+ "module": "matchify",
+ "name": "Customer Authentications",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
