@@ -244,3 +244,24 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
+def after_install():
+    # تثبيت الـ Print Format بعد تثبيت التطبيق
+    create_print_format()
+
+def create_print_format():
+    import frappe
+    from frappe.core.doctype.print_format.print_format import PrintFormat
+
+    # تحقق إذا كانت الطباعة المخصصة موجودة
+    if not frappe.db.exists('Print Format', 'My Custom Format'):
+        # إنشاء Print Format جديد
+        print_format = PrintFormat(
+            {
+                "name": "My Custom Format",
+                "doc_type": "Sales Invoice",  # أو أي Doctype تختاره
+                "print_format": "my_custom_format.html",
+                "standard": 1,  # الطباعة ستكون مخصصة
+                "is_custom": 1,
+            }
+        )
+        print_format.insert(ignore_permissions=True)

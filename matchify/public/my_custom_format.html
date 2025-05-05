@@ -1,0 +1,64 @@
+{% for row in doc.customer_balance %}
+<div style="page-break-after: always; padding: 30px; font-family: 'Arial'; direction: rtl; text-align: right; font-size: 14px;">
+    {{ letter_head }}
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2>مطابقة أرصدة العملاء</h2>
+        <p>تاريخ المطابقة: {{ frappe.format(doc.date, {'fieldtype':'Date'}) }}</p>
+    </div>
+    <hr>
+    <br>
+    <!-- بيانات العميل -->
+    <p>السادة / <strong>{{ row.customer_name or row.customer }}</strong></p>
+    <p style="text-align: center;">بعد التحية،</p>
+
+    {% set currency = row.currency or doc.currency or "SAR" %}
+    {% set balance = (row.balance or 0) | float %}
+    {% set currency_doc = frappe.get_doc("Currency", currency) %}
+    {% set currency_name_ar = currency_doc.currency_name_ar or currency_doc.currency_name or "" %}
+    
+    {% if currency_name_ar != "EGP" and currency_name_ar != "SAR" %}
+        {% set formatted_balance = "{:,.2f}".format(balance) %}
+    {% else %}
+        {% set formatted_balance = "{:,.2f}".format(balance) %}
+    {% endif %}
+
+    <p>
+        نود أن نفيدكم أن رصيدكم لدينا حتى تاريخ 
+        {{ frappe.format(doc.date, {'fieldtype':'Date'}) }} 
+        هو مبلغ <strong>{{ formatted_balance }} {{ currency }}</strong>.
+    </p>
+
+    <p>({{ frappe.utils.money_in_words(balance, currency) }})</p>
+
+    <br>
+    <p>للتحقق من صحة هذا الرصيد نرجو مراجعته مع سجلاتكم وإرسال مصادقتكم مباشرة إلى مراجعي حساباتنا.</p>
+    <p>السادة / <strong>{{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).office_name }}</strong>، وذلك باستكمال الجزء السفلي من هذا الخطاب.</p>
+    <p>ترسل المصادقة إلى السادة / {{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).office_name }}،
+    {{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).postal_address or "" }}، أو عبر البريد الإلكتروني
+    {{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).e_mail or "" }}، أو على الفاكس
+    {{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).fax or "" }}، في أقرب وقت ممكن.</p>
+
+    <p style="text-align: center;">وتفضلوا بقبول فائق الاحترام،</p>
+
+    <br><br>
+    <hr>
+
+    <p>السادة / {{ frappe.get_doc("Audit Office for Certifications", doc.audit_office).office_name }}</p>
+    <p>نصادق على أن رصيدنا مع شركة {{ frappe.get_doc("Company", doc.company).company_name }}
+    البالغ .................. {{ currency_name_ar }} كما في التاريخ المحدد أعلاه صحيح فيما عدا الإختلافات الآتية:</p>
+
+    <hr>
+    <p>الاسم: ..............................................................</p>
+    <p>التوقيع: ..........................................................</p>
+    <p>الختم: ............................................................</p>
+
+    <!-- المحاسب و يعتمد -->
+    <table style="width: 100%; margin-top: 30px;">
+        <tr>
+            <td style="text-align: right;"><strong>المحاسب</strong></td>
+            <td style="text-align: left;"><strong>يعتمد</strong></td>
+        </tr>
+    </table>
+
+</div>
+{% endfor %}
