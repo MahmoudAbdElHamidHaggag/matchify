@@ -29,7 +29,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Identify Customers",
-   "options": "All Customer\nCustomer Group\nCustomer\nCustomer by Sales Person",
+   "options": "\nAll Customer\nCustomer Group\nCustomer\nCustomer by Sales Person",
    "reqd": 1
   },
   {
@@ -44,8 +44,7 @@
    "fieldname": "customer_balance",
    "fieldtype": "Table",
    "label": "Customer Balance",
-   "options": "Customer Balance Row",
-   "read_only": 1
+   "options": "Customer Balance Row"
   },
   {
    "fieldname": "amended_from",
@@ -110,7 +109,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-05-04 22:13:17.199178",
+ "modified": "2025-06-17 12:59:06.377914",
  "modified_by": "Administrator",
  "module": "matchify",
  "name": "Customer Authentications",

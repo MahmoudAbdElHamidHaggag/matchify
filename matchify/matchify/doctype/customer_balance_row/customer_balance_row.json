@@ -7,28 +7,37 @@
  "engine": "InnoDB",
  "field_order": [
   "customer",
+  "customer_name",
   "balance"
  ],
  "fields": [
   {
    "fieldname": "customer",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Customer",
-   "options": "Customer"
+   "label": "Customer ID",
+   "read_only": 1
   },
   {
    "fieldname": "balance",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Balance"
+   "label": "Balance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-05-04 01:11:26.373900",
+ "modified": "2025-06-17 12:21:38.561612",
  "modified_by": "Administrator",
  "module": "matchify",
  "name": "Customer Balance Row",

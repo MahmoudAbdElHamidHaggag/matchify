@@ -10,25 +10,22 @@ def get_customers_data(identify_customers, customer_group=None, customer=None, s
     date = getdate(date)
     customers = []
 
-    # إذا تم اختيار "كل العملاء"
     if identify_customers == "All Customer":
         customers = frappe.get_all("Customer", fields=["name"])
 
-    # إذا تم اختيار "مجموعة العملاء"
     elif identify_customers == "Customer Group" and customer_group:
         customers = frappe.get_all("Customer", filters={"customer_group": customer_group}, fields=["name"])
 
-    # إذا تم اختيار "عميل"
     elif identify_customers == "Customer" and customer:
         customers = [{"name": customer}]
 
-    # إذا تم اختيار "العملاء حسب عضو المبيعات"
     elif identify_customers == "Customer by Sales Person" and sales_person:
         customers = frappe.db.sql("""
             SELECT DISTINCT parent AS name
             FROM `tabSales Team`
             WHERE parenttype = 'Customer' AND sales_person = %s
         """, (sales_person,), as_dict=True)
+
 
     result = []
     for cust in customers:
@@ -39,7 +36,8 @@ def get_customers_data(identify_customers, customer_group=None, customer=None, s
         """, (cust["name"], date))[0][0] or 0
 
         result.append({
-            "customer": cust["name"],
+            "customer_id": cust["name"],
+            "customer_name": frappe.db.get_value("Customer", cust["name"], "customer_name"),
             "balance": total
         })
 

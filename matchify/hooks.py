@@ -244,4 +244,11 @@ app_license = "mit"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-fixtures = ["Print Format"]
+fixtures = [
+    {
+        "doctype": "Print Format",
+        "filters": [
+            ["name", "=", "Customer Balance PDF Pages"]
+        ]
+    }
+]
