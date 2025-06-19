@@ -13,8 +13,8 @@ frappe.ui.form.on('Customer Authentications', {
 			wrapper.find('.grid-row-check').hide();
 			wrapper.find('.grid-check-all').hide();
 
-			// also hide the entire first column header if needed
-			wrapper.find('th[data-fieldname="_check"]').hide();  // header checkbox
+			
+			wrapper.find('th[data-fieldname="_check"]').hide();  
 		}, 300);
 		
         frm.set_query("customer_by_sales_person", () => {

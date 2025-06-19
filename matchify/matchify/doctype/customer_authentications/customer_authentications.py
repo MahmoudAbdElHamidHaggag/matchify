@@ -1,20 +1,33 @@
 import frappe
 from frappe.utils import getdate
 from frappe.model.document import Document
+from frappe.core.doctype.user_permission.user_permission import get_user_permissions
+from frappe.utils.user import UserPermissions
 
 class CustomerAuthentications(Document):
     pass
 
-@frappe.whitelist()
+@frappe.whitelist()	
 def get_customers_data(identify_customers, customer_group=None, customer=None, sales_person=None, date=None):
     date = getdate(date)
     customers = []
 
     if identify_customers == "All Customer":
-        customers = frappe.get_all("Customer", fields=["name"])
+        user = frappe.session.user
+        perms = get_user_permissions(user)
+        allowed_customers = [x["doc"] for x in perms.get("Customer", [])]
+        allowed_groups = [x["doc"] for x in perms.get("Customer Group", [])]
+        group_customers = frappe.get_all("Customer",filters={"customer_group": ["in", allowed_groups]},fields=["name"]) 
+        group_customer_names = [c["name"] for c in group_customers]
+        final_allowed_names = list(set(allowed_customers + group_customer_names))
+        if not final_allowed_names:
+            frappe.throw("You do not have permission to view any customer.")
+        customers = frappe.get_all("Customer", filters={"name": ["in", final_allowed_names]}, fields=["name"])
+        
+        
 
     elif identify_customers == "Customer Group" and customer_group:
-        customers = frappe.get_all("Customer", filters={"customer_group": customer_group}, fields=["name"])
+        customers = frappe.get_all("Customer", filters={"customer_group": customer_group})
 
     elif identify_customers == "Customer" and customer:
         customers = [{"name": customer}]
