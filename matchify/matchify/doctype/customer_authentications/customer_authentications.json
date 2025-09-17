@@ -15,6 +15,14 @@
   "column_break_akpv",
   "date",
   "audit_office",
+  "section_break_qsjb",
+  "show_debit_balance",
+  "column_break_pldt",
+  "show_zero_balance",
+  "column_break_pwrj",
+  "show_credit_balance",
+  "column_break_ikub",
+  "show_only_with_email",
   "section_break_r9wx",
   "customer_balance",
   "amended_from"
@@ -103,13 +111,53 @@
    "label": "Customer by Sales Person",
    "mandatory_depends_on": "eval:doc.identify_customers == 'Customer by Sales Person'",
    "options": "Sales Person"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_zero_balance",
+   "fieldtype": "Check",
+   "label": "Show Zero Balance"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_debit_balance",
+   "fieldtype": "Check",
+   "label": "Show Debit Balance"
+  },
+  {
+   "default": "0",
+   "fieldname": "show_credit_balance",
+   "fieldtype": "Check",
+   "label": "Show Credit Balance"
+  },
+  {
+   "fieldname": "section_break_qsjb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_pldt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pwrj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ikub",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_only_with_email",
+   "fieldtype": "Check",
+   "label": "Show Only Customer With Email"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-17 12:59:06.377914",
+ "modified": "2025-09-16 20:44:13.075077",
  "modified_by": "Administrator",
  "module": "matchify",
  "name": "Customer Authentications",

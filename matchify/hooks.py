@@ -246,9 +246,21 @@ app_license = "mit"
 # }
 fixtures = [
     {
-        "doctype": "Print Format",
+        "dt": "Print Format",
+        "filters": [["name", "in", ["Customer Balance PDF Pages"]]],
+    },
+    # لو عايز تضمن أن الدوكتايب عنده الافتراضي ده دائمًا:
+    {
+        "dt": "Property Setter",
         "filters": [
-            ["name", "=", "Customer Balance PDF Pages"]
-        ]
-    }
+            ["doc_type", "=", "Customer Authentications"],
+            ["property", "=", "default_print_format"],
+        ],
+    },
+    # (اختياري) لو عندك Email Template مخصّص للإرسال:
+    # {
+    #     "dt": "Email Template",
+    #     "filters": [["name", "in", ["<YOUR_EMAIL_TEMPLATE_NAME>"]]],
+    # },
 ]
+
